@@ -14,7 +14,7 @@
   "license": "MIT",
   "devDependencies": {
     "@cloudflare/workers-types": "^1.0.1",
-    "@types/chai": "^4.1.7",
+    "@types/chai": "^4.2.7",
     "@types/mocha": "^5.2.7",
     "chai": "^4.2.0",
     "mocha": "^6.1.4",
@@ -24,11 +24,12 @@
     "source-map-loader": "^0.2.4",
     "source-map-support": "^0.5.12",
     "ts-loader": "^6.0.4",
-    "typescript": "^3.5.3",
+    "typescript": "^3.7.3",
     "webpack": "^4.35.3",
     "webpack-cli": "^3.3.6"
   },
   "dependencies": {
+    "@cloudflare/kv-asset-handler": "0.0.7",
     "node-buffer": "^1.0.3"
   }
 }
