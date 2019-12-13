@@ -1,0 +1,34 @@
+{
+  "name": "gumdrop",
+  "version": "0.0.1",
+  "description": "Workers powered file storage",
+  "main": "./dist/worker.production.js",
+  "scripts": {
+    "build": "webpack",
+    "fmt": "prettier --write '**/*.{ts,js,css,json,md}'",
+    "test:clean": "rimraf ./transpiled/src ./transpiled/test",
+    "test": "npm run test:clean && npm run transpile && mocha --require source-map-support/register --recursive transpiled/test",
+    "transpile": "tsc --project ./test"
+  },
+  "author": "Avery Harnish",
+  "license": "MIT",
+  "devDependencies": {
+    "@cloudflare/workers-types": "^1.0.1",
+    "@types/chai": "^4.1.7",
+    "@types/mocha": "^5.2.7",
+    "chai": "^4.2.0",
+    "mocha": "^6.1.4",
+    "prettier": "^1.18.2",
+    "rimraf": "^3.0.0",
+    "service-worker-mock": "^2.0.3",
+    "source-map-loader": "^0.2.4",
+    "source-map-support": "^0.5.12",
+    "ts-loader": "^6.0.4",
+    "typescript": "^3.5.3",
+    "webpack": "^4.35.3",
+    "webpack-cli": "^3.3.6"
+  },
+  "dependencies": {
+    "node-buffer": "^1.0.3"
+  }
+}

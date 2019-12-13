@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+      var input = document.querySelector("input");
+      input.addEventListener("change", updateImageDisplay);
+      var preview = document.querySelector(".preview");
+      function returnFileSize(number) {
+        if (number < 1024) {
+          return number + "bytes";
+        } else if (number >= 1024 && number < 1048576) {
+          return (number / 1024).toFixed(1) + "KB";
+        } else if (number >= 1048576) {
+          return (number / 1048576).toFixed(1) + "MB";
+        }
+      }
+      function isFileUnder10MB(fileSize) {
+        if (fileSize >= 10485760) {
+          return true;
+        }
+        return false;
+      }
+      function updateImageDisplay() {
+        while (preview.firstChild) {
+          preview.removeChild(preview.firstChild);
+        }
+
+        var curFiles = input.files;
+        if (curFiles.length === 0) {
+          var para = document.createElement("p");
+          para.textContent = "No files currently selected for upload";
+          preview.appendChild(para);
+        } else {
+          var list = document.createElement("ol");
+          preview.appendChild(list);
+          for (var i = 0; i < curFiles.length; i++) {
+            var listItem = document.createElement("li");
+            var para = document.createElement("p");
+            if (validFileType(curFiles[i])) {
+              para.textContent =
+                "File name " +
+                curFiles[i].name +
+                ", file size " +
+                returnFileSize(curFiles[i].size) +
+                ".";
+              var image = document.createElement("img");
+              image.src = window.URL.createObjectURL(curFiles[i]);
+
+              listItem.appendChild(image);
+              listItem.appendChild(para);
+            } else {
+              para.textContent =
+                "File name " +
+                curFiles[i].name +
+                ": Not a valid file type. Update your selection.";
+              listItem.appendChild(para);
+            }
+
+            list.appendChild(listItem);
+          }
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Upload a file!</h1>
+    <form method="post" enctype="multipart/form-data">
+      <div>
+        <label for="image_uploads">Choose images to upload (PNG, JPG)</label>
+        <input
+          type="file"
+          id="image_uploads"
+          name="image_uploads"
+          accept=".jpg, .jpeg, .png"
+          multiple
+        />
+      </div>
+      <div class="preview">
+        <p>No files currently selected for upload</p>
+      </div>
+      <div>
+        <button>Submit</button>
+      </div>
+    </form>
+  </body>
+</html>
